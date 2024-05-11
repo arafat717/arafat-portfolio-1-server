@@ -8,6 +8,8 @@ import express, { Application, Request, Response } from 'express';
 import globalErrorHandler from './app/middlewares/globalErrorhandler';
 import notFound from './app/middlewares/notFound';
 import router from './app/routes';
+import { SkillsRoute } from './modules/Skills/Skills.routes';
+import { BlogRoute } from './modules/Blogs/Blog.route';
 
 const app: Application = express();
 
@@ -19,6 +21,8 @@ app.use(cors({ origin: ['http://localhost:5173'], credentials: true }));
 
 // application routes
 app.use('/api/v1', router);
+app.use('/api/v1/skill', SkillsRoute);
+app.use('/api/v1/blog', BlogRoute);
 
 app.get('/', (req: Request, res: Response) => {
   res.send('Hi Next Level Developer !');
