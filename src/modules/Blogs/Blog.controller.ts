@@ -30,7 +30,23 @@ const getallBlog = async (req: Request, res: Response) => {
   }
 };
 
+const getSingleBlog = async (req: Request, res: Response) => {
+  try {
+    const { Id } = req.params;
+    const results = await BlogService.getSingleBlogFromDb(Id);
+
+    res.status(200).json({
+      success: true,
+      message: 'Single data is here',
+      data: results,
+    });
+  } catch (err) {
+    console.log(err);
+  }
+};
+
 export const BlogController = {
   createBlog,
   getallBlog,
+  getSingleBlog,
 };
