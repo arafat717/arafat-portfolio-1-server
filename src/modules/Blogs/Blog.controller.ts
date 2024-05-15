@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Request, Response } from 'express';
 import { BlogService } from './Blog.service';
 
@@ -45,8 +46,32 @@ const getSingleBlog = async (req: Request, res: Response) => {
   }
 };
 
+const delateUser = async (req: Request, res: Response) => {
+  try {
+    const { Id } = req.params;
+    console.log(Id);
+    const result = await BlogService.deleteUserFromDB(Id);
+
+    res.status(200).json({
+      success: true,
+      message: 'Users deleted successfully!',
+      data: result,
+    });
+  } catch (error: any) {
+    res.status(500).json({
+      success: false,
+      message: 'User not found',
+      error: {
+        code: 404,
+        description: 'User not found!',
+      },
+    });
+  }
+};
+
 export const BlogController = {
   createBlog,
   getallBlog,
   getSingleBlog,
+  delateUser,
 };

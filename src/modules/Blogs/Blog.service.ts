@@ -16,8 +16,14 @@ const getSingleBlogFromDb = async (id: string) => {
   return result;
 };
 
+const deleteUserFromDB = async (id: number) => {
+  const result = await Blogs.findOneAndDelete({ _id: id });
+  return result;
+};
+
 export const BlogService = {
   createBlogIntoDb,
   getAllBlogIntoDb,
   getSingleBlogFromDb,
+  deleteUserFromDB,
 };
