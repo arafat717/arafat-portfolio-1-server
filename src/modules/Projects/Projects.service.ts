@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { TProject } from './Project.interface';
 import { Project } from './Projects.model';
 
@@ -11,7 +12,22 @@ const getProjectsFromDb = async () => {
   return result;
 };
 
+const deleteProjectFromDB = async (id: string) => {
+  const result = await Project.findOneAndDelete({ _id: id });
+  return result;
+};
+
+const updateProjectFromDB = async (id: string, userData: any) => {
+  const result = await Project.findOneAndUpdate({ _id: id }, userData, {
+    new: true,
+    runValidators: true,
+  });
+  return result;
+};
+
 export const ProjectService = {
   createProjectIntoDb,
   getProjectsFromDb,
+  deleteProjectFromDB,
+  updateProjectFromDB,
 };
