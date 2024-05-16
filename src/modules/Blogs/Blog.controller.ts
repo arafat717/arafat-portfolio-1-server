@@ -69,9 +69,33 @@ const delateUser = async (req: Request, res: Response) => {
   }
 };
 
+const updateBlog = async (req: Request, res: Response) => {
+  try {
+    const userData = req.body;
+    const { Id } = req.params;
+    const result = await BlogService.updateBlogFromDB(Id, userData);
+
+    res.status(200).json({
+      success: true,
+      message: 'Users updated successfully!',
+      data: result,
+    });
+  } catch (error: any) {
+    res.status(500).json({
+      success: false,
+      message: 'User not found',
+      error: {
+        code: 404,
+        description: 'User not found!',
+      },
+    });
+  }
+};
+
 export const BlogController = {
   createBlog,
   getallBlog,
   getSingleBlog,
   delateUser,
+  updateBlog,
 };

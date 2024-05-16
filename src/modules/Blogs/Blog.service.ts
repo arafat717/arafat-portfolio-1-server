@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { TBlogs } from './Blog.interface';
 import { Blogs } from './Blog.model';
 
@@ -16,8 +17,16 @@ const getSingleBlogFromDb = async (id: string) => {
   return result;
 };
 
-const deleteUserFromDB = async (id: number) => {
+const deleteUserFromDB = async (id: string) => {
   const result = await Blogs.findOneAndDelete({ _id: id });
+  return result;
+};
+
+const updateBlogFromDB = async (id: string, userData: any) => {
+  const result = await Blogs.findOneAndUpdate({ _id: id }, userData, {
+    new: true,
+    runValidators: true,
+  });
   return result;
 };
 
@@ -26,4 +35,5 @@ export const BlogService = {
   getAllBlogIntoDb,
   getSingleBlogFromDb,
   deleteUserFromDB,
+  updateBlogFromDB,
 };
