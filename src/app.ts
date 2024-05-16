@@ -13,7 +13,7 @@ const app: Application = express();
 // Enable CORS for all routes
 app.use(
   cors({
-    origin: ['http://localhost:5173'],
+    origin: ['https://arafat-portfolio.vercel.app'],
     credentials: true,
   }),
 );
