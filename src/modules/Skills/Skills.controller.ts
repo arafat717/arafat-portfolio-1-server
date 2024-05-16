@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Request, Response } from 'express';
 import { SkillsService } from './Skills.serveice';
 
@@ -45,8 +46,55 @@ const getSingleSkill = async (req: Request, res: Response) => {
   }
 };
 
+const delateSkill = async (req: Request, res: Response) => {
+  try {
+    const { Id } = req.params;
+    const result = await SkillsService.deleteSkillFromDB(Id);
+
+    res.status(200).json({
+      success: true,
+      message: 'Users deleted successfully!',
+      data: result,
+    });
+  } catch (error: any) {
+    res.status(500).json({
+      success: false,
+      message: 'User not found',
+      error: {
+        code: 404,
+        description: 'User not found!',
+      },
+    });
+  }
+};
+
+const updateSkill = async (req: Request, res: Response) => {
+  try {
+    const userData = req.body;
+    const { Id } = req.params;
+    const result = await SkillsService.updateSkillFromDB(Id, userData);
+
+    res.status(200).json({
+      success: true,
+      message: 'Users updated successfully!',
+      data: result,
+    });
+  } catch (error: any) {
+    res.status(500).json({
+      success: false,
+      message: 'User not found',
+      error: {
+        code: 404,
+        description: 'User not found!',
+      },
+    });
+  }
+};
+
 export const SkillsController = {
   createSkill,
   getAllSkills,
   getSingleSkill,
+  updateSkill,
+  delateSkill,
 };
