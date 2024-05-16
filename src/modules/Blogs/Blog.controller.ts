@@ -49,7 +49,6 @@ const getSingleBlog = async (req: Request, res: Response) => {
 const delateUser = async (req: Request, res: Response) => {
   try {
     const { Id } = req.params;
-    console.log(Id);
     const result = await BlogService.deleteUserFromDB(Id);
 
     res.status(200).json({
