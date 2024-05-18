@@ -25,9 +25,15 @@ const updateProjectFromDB = async (id: string, userData: any) => {
   return result;
 };
 
+const getSingleProjectFromDb = async (id: string) => {
+  const result = await Project.findOne({ _id: id });
+  return result;
+};
+
 export const ProjectService = {
   createProjectIntoDb,
   getProjectsFromDb,
   deleteProjectFromDB,
   updateProjectFromDB,
+  getSingleProjectFromDb,
 };

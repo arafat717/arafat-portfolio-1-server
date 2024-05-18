@@ -77,9 +77,25 @@ const updateProject = async (req: Request, res: Response) => {
   }
 };
 
+const getSingleProject = async (req: Request, res: Response) => {
+  try {
+    const { Id } = req.params;
+    const results = await ProjectService.getSingleProjectFromDb(Id);
+
+    res.status(200).json({
+      success: true,
+      message: 'Single data is here',
+      data: results,
+    });
+  } catch (err) {
+    console.log(err);
+  }
+};
+
 export const ProjectController = {
   createProject,
   getAllProjects,
   delateProject,
   updateProject,
+  getSingleProject,
 };

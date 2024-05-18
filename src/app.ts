@@ -13,10 +13,12 @@ const app: Application = express();
 // Enable CORS for all routes
 app.use(
   cors({
-    origin: ['https://arafat-portfolio.vercel.app'],
+    origin: ['http://localhost:5173'],
     credentials: true,
   }),
 );
+// https://arafat-portfolio.vercel.app
+// http://localhost:5173/
 
 // parsers
 app.use(express.json());

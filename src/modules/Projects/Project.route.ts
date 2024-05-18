@@ -7,5 +7,6 @@ router.post('/create-project', ProjectController.createProject);
 router.get('/', ProjectController.getAllProjects);
 router.delete('/:Id', ProjectController.delateProject);
 router.put('/:Id', ProjectController.updateProject);
+router.get('/:Id', ProjectController.getSingleProject);
 
 export const ProjectRoute = router;
